@@ -33,7 +33,7 @@ const devConfig = merge.smart(baseConfig, {
     port,
     historyApiFallback: true,
     inline: true,
-    host: "192.168.33.10"
+    host: "0.0.0.0"
   },
 
   devtool: false,
