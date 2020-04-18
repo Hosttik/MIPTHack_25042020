@@ -11,7 +11,7 @@
     "build": "yarn clean; webpack-cli --config ./config/webpack.prod.config.js --progress"
   },
   "dependencies": {
-    "axios": "^0.17.1",
+    "axios": "^0.18.1",
     "file-saver": "^2.0.2",
     "qs": "^6.9.3",
     "sequelize": "^4.42.0",
