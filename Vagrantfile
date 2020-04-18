@@ -94,5 +94,10 @@ sudo apt install -y python3.7
 sudo update-alternatives --install /usr/bin/python python /usr/bin/python3.5 1
 sudo update-alternatives --install /usr/bin/python python /usr/bin/python3.7 2
 sudo update-alternatives  --set python /usr/bin/python3.7
+sudo apt-get install -y python3-pip
+python -m pip install --upgrade pip
+python -m pip -V
+
+# python packages
 sudo apt-get install python-bottle
 SHELL
