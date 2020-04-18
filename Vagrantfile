@@ -86,6 +86,13 @@ echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/source
 sudo apt-get update && sudo apt-get install yarn
 
 # python
-sudo apt-get install python
+sudo apt update
+sudo apt install software-properties-common
+sudo add-apt-repository -y ppa:deadsnakes/ppa
+sudo apt update
+sudo apt install -y python3.7
+sudo update-alternatives --install /usr/bin/python python /usr/bin/python3.5 1
+sudo update-alternatives --install /usr/bin/python python /usr/bin/python3.7 2
+sudo update-alternatives  --set python /usr/bin/python3.7
 sudo apt-get install python-bottle
 SHELL
