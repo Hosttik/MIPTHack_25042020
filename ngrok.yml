@@ -1,0 +1,8 @@
+authtoken: 1air5wADyqafCTnN9EPZcOn0QMd_3KYYZAXkKfNAKGTBJdNZ5
+tunnels:
+  frontend:
+    addr: 8081
+    proto: http
+  backend:
+    addr: 8080
+    proto: http
