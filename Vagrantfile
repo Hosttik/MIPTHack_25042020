@@ -112,7 +112,8 @@ sudo apt-get install -y docker-engine
 sudo apt-get install -y docker-compose
 
 # composer
-curl -sS https://getcomposer.org/installer | php
-mv composer.phar /usr/local/bin/composer
+sudo apt-get install -y php
+sudo curl -sS https://getcomposer.org/installer | php
+sudo mv composer.phar /usr/local/bin/composer
 
 SHELL
