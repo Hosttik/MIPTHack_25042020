@@ -99,5 +99,6 @@ python -m pip install --upgrade pip
 python -m pip -V
 
 # python packages
-sudo apt-get install python-bottle
+sudo apt-get install -y sqlite3
+pip install bottle
 SHELL
