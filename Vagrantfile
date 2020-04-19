@@ -101,4 +101,7 @@ python -m pip -V
 # python packages
 sudo apt-get install -y sqlite3
 pip install bottle
+
+# php
+
 SHELL
