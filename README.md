@@ -4,7 +4,7 @@
 #How stop public network server
     run command `source stopPublicServers.sh`
     
-#How intsall php
+#How install php
      1. cd /var/www/library/backend/
      2. sudo docker-compose run --rm backend composer install
      3. sudo docker-compose run --rm backend php /app/init
