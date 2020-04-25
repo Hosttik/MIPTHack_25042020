@@ -2,7 +2,16 @@
 
 namespace console\classes\parsers;
 
+use console\models\Product;
 use console\models\RawCols;
+use console\models\RawOperations;
+use console\models\RawResourceGroupPeriod;
+use console\models\RawRoutingSteps;
+use console\models\RawSupplyOrders;
+use console\models\RawRouting;
+use console\models\ResourceGroup;
+use console\models\Shop;
+use console\models\Warhouse;
 use PhpOffice\PhpSpreadsheet\Collection\Cells;
 use PhpOffice\PhpSpreadsheet\Reader\Xlsx;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
@@ -60,14 +69,13 @@ class ParserXlsx
             foreach ($this->header_row as $letter => $header_title) {
                 $cell = $cell_collection->get($letter . $num_row);
                 if (!$cell) {
-                    $count_empty_row_in_sequence++;
-                    break;
+                    continue;
                 }
                 $cell_value = (string)$cell->getValue();
                 $row[$header_title] = $cell_value;
             }
             $this->setModelRow($row, $time);
-            if (!$row[0] && !$row[1] && !$row[2]) {
+            if (!$row[0] && !$row[1]) {
                 $count_empty_row_in_sequence++;
                 continue;
             }
@@ -84,6 +92,8 @@ class ParserXlsx
             $this->model_headers = $this->model_name::batchInsert($rows);
             $rows = [];
         }
+        unset($rows);
+        unset($cell_collection);
     }
 
     private function setModelRow(array &$row, int $time)
@@ -114,14 +124,50 @@ class ParserXlsx
         }
 
         $parts_path = pathinfo($this->file_path);
-        switch ($parts_path['filename']) {
+        $parts_path['filename'];
+        switch ($this->getFileName($parts_path['filename'])) {
             case '01.COLs':
                 $this->model_name = RawCols::class;
+                return;
+            case '02.Supply Orders':
+                $this->model_name = RawSupplyOrders::class;
+                return;
+            case '03.Operations':
+                $this->model_name = RawOperations::class;
+                return;
+            case '04.ResourceGroupPeriod':
+                $this->model_name = RawResourceGroupPeriod::class;
+                return;
+            case '05.Routrings':
+                $this->model_name = RawRouting::class;
+                return;
+            case '06.RoutringSteps':
+                $this->model_name = RawRoutingSteps::class;
+                return;
+            case 'shop':
+                $this->model_name = Shop::class;
+                return;
+            case 'warhouse':
+                $this->model_name = Warhouse::class;
+                return;
+            case 'product':
+                $this->model_name = Product::class;
+                return;
+            case 'resource_group':
+                $this->model_name = ResourceGroup::class;
                 return;
             default:
                 $this->model_headers = null;
                 return;
         }
+    }
+
+    private function getFileName(string $filename): string
+    {
+        $pattern = "/(.+)?_\d+$/i";
+        $replacement = "\${1}";
+
+        return preg_replace($pattern, $replacement, $filename);
     }
 
     private function setExcelHeadersByFileName(): void
@@ -170,7 +216,7 @@ class ParserXlsx
         foreach ($alphabet as $letter) {
             $cell = $cell_collection->get($letter . $num_row);
             if (!$cell) {
-                break;
+                continue;
             }
             $cell_value = trim((string) $cell->getValue());
             if (in_array($cell_value, $this->excel_headers)) {
