@@ -12,6 +12,7 @@ class m200425_114835_create_raw_cols_table extends Migration
      */
     public function safeUp()
     {
+        $table_options = 'CHARACTER SET utf8 COLLATE utf8_general_ci ENGINE=InnoDB';
         $this->createTable('{{%raw_cols}}', [
             'id' => $this->primaryKey(),
             'COLAlloc' => $this->string(),
@@ -34,7 +35,7 @@ class m200425_114835_create_raw_cols_table extends Migration
             'ResourceGroupIds' => $this->string(),
             'date_created' => $this->integer(),
             'date_modified' => $this->integer(),
-        ]);
+        ], $table_options);
     }
 
     /**
