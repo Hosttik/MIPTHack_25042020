@@ -50,30 +50,14 @@
 </template>
 
 <script>
-  import { v4 as uuidv4 } from 'uuid';
-
   export default {
     name: 'App',
-    beforeCreate: async function () {
-      const userId = localStorage.getItem('memHackUserId');
-      if (!userId) {
-        localStorage.setItem('memHackUserId', uuidv4());
-      }
-    },
     data() {
       return {};
     },
     methods: {
       getMenuItems() {
-        return [{
-          title: 'Главная',
-          icon: 'fa-upload',
-          href: '/'
-        }, {
-          title: 'Личный кабинет',
-          icon: 'fa-user',
-          href: '/account'
-        }];
+        return [];
       }
     }
   };

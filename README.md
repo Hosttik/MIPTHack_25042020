@@ -20,3 +20,9 @@
      
 #After u install php run only this
      docker-compose up -d  
+     
+#How install mysql dump
+    1. run `docker ps`
+    2. find mysql container id 
+    3. run command `docker exec -it <container name> /bin/bash`
+    4. run command `mysql -u yii2advanced -h 127.0.0.1 -psecret yii2advanced < /app/backend/yii2advanced_sql`

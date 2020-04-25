@@ -8,7 +8,7 @@ Vue.use(Vuex);
 
 const store = new Vuex.Store({
   state: {
-    theme: 'indigo',
+    theme: 'deepPurple',
     loader: false
   },
   actions,
