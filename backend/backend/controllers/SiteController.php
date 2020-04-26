@@ -1,6 +1,7 @@
 <?php
 namespace backend\controllers;
 
+use console\models\RawCols;
 use Yii;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
@@ -74,6 +75,7 @@ class SiteController extends Controller
             return $this->goHome();
         }
 
+        RawCols::getPlannedOrders();
         $model = new LoginForm();
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
             return $this->goBack();

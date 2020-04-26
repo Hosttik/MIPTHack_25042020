@@ -34,6 +34,8 @@ class RawCols extends ActiveRecord
 {
     use DatesSaveTrait;
 
+    public const NOT_PLANNED_STATUS = 'ImgPlannedStatusUpstreamNotPlanned';
+
     /**
      * @inheritdoc
      */
@@ -110,5 +112,13 @@ class RawCols extends ActiveRecord
         $columns = self::getTableSchema()->columnNames;
         array_shift($columns);
         Yii::$app->db->createCommand()->batchInsert(self::tableName(), $columns, $rows)->execute();
+    }
+
+    public static function getPlannedOrders(): array
+    {
+        return self::find()
+            ->where(['!=', 'ImgPlannedStatus', self::NOT_PLANNED_STATUS])
+            ->asArray()
+            ->all();
     }
 }
